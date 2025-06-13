@@ -1,0 +1,24 @@
+{
+    "Country Naming Game":{
+        "description": "Guess the names of the countries of the world by clicking on an interactive 3d globe!",
+        "links": {
+            "Try It Out!": "https://jchenvan.github.io/naming-countries-game/",
+            "Github Repo": "https://github.com/jChenvan/naming-countries-game"
+        }
+    },
+    "UnAI: AI Followers Platform":{
+        "description": "Make posts on an X-inspired social media platform, and read the responses from your custom AI followers!",
+        "links": {
+            "Try It Out!": "https://jchenvan.github.io/ai-followers-frontend",
+            "Github Repo [Front End]": "https://github.com/jChenvan/ai-followers-frontend",
+            "Github Repo [Back End]": "https://github.com/jChenvan/ai-followers-backend"
+        }
+    },
+    "Note Taking App":{
+        "description": "A simple app for jotting down notes",
+        "links": {
+            "Try It Out!": "https://curious-valkyrie-ddb586.netlify.app/",
+            "Github Repo": "https://github.com/jChenvan/note-app"
+        }
+    }
+}
