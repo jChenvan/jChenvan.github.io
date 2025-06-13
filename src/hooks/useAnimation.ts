@@ -4,7 +4,6 @@ import { GLTFLoader, type GLTF } from "three/examples/jsm/Addons.js";
 
 export default function useAnimation() {
     const canvas = useRef(document.createElement("canvas"));
-    canvas.current.style.filter = "drop-shadow(5px 5px 0px rgb(95, 0, 204))";
     const scene = useRef(new THREE.Scene());
     const renderer = useRef(new THREE.WebGLRenderer({ canvas: canvas.current, alpha: true, antialias: true }));
     const [gltf, setGltf] = useState<GLTF>();
@@ -33,7 +32,8 @@ export default function useAnimation() {
     const setProgress = useMemo(()=>{
         if (!sceneElements || !gltf) return ()=>{};
         const {rig, gear1, gear2, body} = sceneElements;
-        if (!rig || !gear1 || !gear2 || !body) return ()=>{};
+        if (!rig || !gear1 || !gear2 || !body) return ()=>{
+            console.log('uncool!');};
 
         const rigMixer = new THREE.AnimationMixer(rig);
         const gear1Mixer = new THREE.AnimationMixer(gear1);
@@ -95,5 +95,5 @@ export default function useAnimation() {
         return () => {}
     }, [sceneElements, canvas]);
 
-    return {canvas: canvas.current, setFrame: setProgress};
+    return {canvas: canvas.current, setProgress};
 }
