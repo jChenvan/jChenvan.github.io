@@ -7,6 +7,7 @@ export default function useAnimation() {
     const scene = useRef(new THREE.Scene());
     const renderer = useRef(new THREE.WebGLRenderer({ canvas: canvas.current, alpha: true, antialias: true }));
     const [gltf, setGltf] = useState<GLTF>();
+    const [done, setDone] = useState(false);
 
     const sceneElements = useMemo(() => {
         if (!gltf) return;
@@ -82,9 +83,10 @@ export default function useAnimation() {
         setProgress(0);
 
         renderer.current.render(scene.current,sceneElements.camera);
+        setDone(true);
 
         return () => {}
     }, [sceneElements, canvas]);
 
-    return {canvas: canvas.current, setProgress};
+    return {canvas: canvas.current, setProgress, done};
 }
