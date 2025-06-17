@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s;
+}
