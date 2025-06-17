@@ -20,18 +20,18 @@ export default function Projects() {
           <div>
             <div className="w-fit h-[500px] mx-auto my-6 border-blue-950 bg-black rounded-lg border-8 box-content">
               <video ref={videoRef} autoPlay muted loop className="h-[500px]">
-                <source src={`/previews/${projects[currentProject].preview}`} type="video/mp4"/>
+                <source src={`/previews/${projects[currentProject as keyof typeof projects].preview}`} type="video/mp4"/>
               </video>
             </div>
             <div className='flex flex-col items-center flex-1 px-2'>
               <h3 className='text-2xl'>{currentProject}</h3>
               <p>
-                {projects[currentProject].description}
+                {projects[currentProject as keyof typeof projects].description}
               </p>
             </div>
             <div>
               <ul className="w-fit my-4 mx-auto">
-                {Object.entries(projects[currentProject].links).map(([text, url])=><li key={url} className='bg-blue-950 text-center mt-2 p-2 rounded-md rounded-br-none hover:bg-blue-500 transition-all'><a href={url}>{text}</a></li>)}
+                {Object.entries(projects[currentProject as keyof typeof projects].links).map(([text, url])=><li key={url as string} className='bg-blue-950 text-center mt-2 p-2 rounded-md rounded-br-none hover:bg-blue-500 transition-all'><a href={url}>{text}</a></li>)}
               </ul>
             </div>
           </div>
