@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import './App.css'
 import useAnimation from './hooks/useAnimation'
 import './index.css'
 import Skills from './components/Skills'
@@ -51,7 +50,7 @@ function App() {
            © 2025 Justin Chenvanich
         </footer>
       </main>
-      <div ref={containerRef} className='sticky top-0 h-screen flex flex-col relative z-10'>
+      <div ref={containerRef} className='sticky top-0 h-screen flex flex-col z-10'>
         <div className='flex-1 flex items-center justify-center'>
           <div className='w-fit text-white bg-gray-800 rounded-lg p-4 shadow-md shadow-black'>
             <h1 className='text-3xl border-b-2 pb-1 mb-1'>Contents</h1>
