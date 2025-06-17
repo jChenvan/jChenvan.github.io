@@ -25,6 +25,7 @@ export default function useAnimation() {
         const gear2 = gltfScene.getObjectByName("Gear001");
 
         const body = gltfScene.getObjectByName("Cube_1") as THREE.SkinnedMesh;
+        if (body.morphTargetInfluences) body.morphTargetInfluences[0] = 1;
 
         return {camera, openEyes, closedEyes, rig, gear1, gear2, body};
     }, [gltf]);
@@ -32,8 +33,7 @@ export default function useAnimation() {
     const setProgress = useMemo(()=>{
         if (!sceneElements || !gltf) return ()=>{};
         const {rig, gear1, gear2, body} = sceneElements;
-        if (!rig || !gear1 || !gear2 || !body) return ()=>{
-            console.log('uncool!');};
+        if (!rig || !gear1 || !gear2 || !body) return ()=>{};
 
         const rigMixer = new THREE.AnimationMixer(rig);
         const gear1Mixer = new THREE.AnimationMixer(gear1);
@@ -60,9 +60,9 @@ export default function useAnimation() {
             gear1Mixer.setTime(progress * gear1Duration);
             gear2Mixer.setTime(progress * gear2Duration);
 
-            const exhale = 4*progress*(1-progress);
+            /* const exhale = 4*progress*(1-progress);
+            body.morphTargetInfluences![1] = exhale; */
 
-            body.morphTargetInfluences![1] = exhale;
             renderer.current.render(scene.current,sceneElements.camera);
         }
     }, [sceneElements]);

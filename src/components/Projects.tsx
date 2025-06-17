@@ -1,17 +1,28 @@
-import { useState } from "react";
-import projects from "../site data/projects.json"
+import { useEffect, useRef, useState } from "react";
+import projects from "../site data/projects"
 
 export default function Projects() {
     const [currentProject, setCurrentProject] = useState(Object.keys(projects)[0]);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
-    return <section className='box-glow rounded-lg p-4 m-6'>
+    useEffect(()=>{
+      const vid = videoRef.current;
+      if (vid) vid.load();
+    }, [currentProject]);
+
+    return <section className='shadow-lg shadow-black rounded-lg p-4 m-6 bg-blue-800 text-white' id="projects">
           <div className='relative'>
-            <h2 className='text-4xl text-center'>My Projects</h2>
+            <h2 className='text-4xl text-center pb-4 border-b-2'>My Projects</h2>
             <select id="project" value={currentProject} onChange={e=>setCurrentProject(e.target.value)} className='absolute top-0 right-0 bg-black p-2 rounded-md'>
               {Object.keys(projects).map((title, index)=><option key={index} value={title}>{title}</option>)}
             </select>
           </div>
-          <div className='flex my-4'>
+          <div>
+            <div className="w-fit h-[500px] mx-auto my-6 border-blue-950 bg-black rounded-lg border-8 box-content">
+              <video ref={videoRef} autoPlay muted loop className="h-[500px]">
+                <source src={`/previews/${projects[currentProject].preview}`} type="video/mp4"/>
+              </video>
+            </div>
             <div className='flex flex-col items-center flex-1 px-2'>
               <h3 className='text-2xl'>{currentProject}</h3>
               <p>
@@ -19,8 +30,8 @@ export default function Projects() {
               </p>
             </div>
             <div>
-              <ul>
-                {Object.entries(projects[currentProject].links).map(([text, url])=><li key={url} className='bg-blue-900 mt-2 p-2 rounded-md rounded-br-none hover:bg-violet-400 transition-all'><a href={url}>{text}</a></li>)}
+              <ul className="w-fit my-4 mx-auto">
+                {Object.entries(projects[currentProject].links).map(([text, url])=><li key={url} className='bg-blue-950 text-center mt-2 p-2 rounded-md rounded-br-none hover:bg-blue-500 transition-all'><a href={url}>{text}</a></li>)}
               </ul>
             </div>
           </div>

@@ -1,4 +1,4 @@
-{
+const skills = {
     "Programming Languages": [
         "Javascript",
         "Python",
@@ -34,3 +34,5 @@
         "Blender"
     ]
 }
+
+export default skills;
