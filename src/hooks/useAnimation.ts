@@ -3,9 +3,9 @@ import * as THREE from "three";
 import { GLTFLoader, type GLTF } from "three/examples/jsm/Addons.js";
 
 export default function useAnimation() {
-    const [canvas, setCanvas] = useState<HTMLCanvasElement>();
+    const canvas = useRef(document.createElement("canvas"));
     const scene = useRef(new THREE.Scene());
-    const renderer = useRef(new THREE.WebGLRenderer({ alpha: true, antialias: true }));
+    const renderer = useRef(new THREE.WebGLRenderer({ canvas: canvas.current, alpha: true, antialias: true }));
     const [gltf, setGltf] = useState<GLTF>();
     const [done, setDone] = useState(false);
 
@@ -79,7 +79,6 @@ export default function useAnimation() {
         renderer.current.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.current.toneMappingExposure = 3;
         renderer.current.setClearColor(0x000000,0);
-        setCanvas(renderer.current.domElement);
 
         setProgress(0);
 
@@ -89,5 +88,5 @@ export default function useAnimation() {
         return () => {}
     }, [sceneElements, canvas]);
 
-    return {canvas, setProgress, done};
+    return {canvas: canvas.current, setProgress, done};
 }
