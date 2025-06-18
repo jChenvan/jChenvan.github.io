@@ -23,8 +23,8 @@ function App() {
 
   useEffect(()=>{
     if (done && profilePicLoaded && mainRef.current && divRef.current) {
-      mainRef.current.classList.remove("opacity-0");
-      divRef.current.classList.remove("opacity-0");
+      mainRef.current.classList.remove("invisible");
+      divRef.current.classList.remove("invisible");
       mainRef.current.classList.add("fade-in");
       divRef.current.classList.add("fade-in");
     }
@@ -47,7 +47,7 @@ function App() {
   return (
     <div className='bg-[#171820] min-h-screen flex relative'>
       <div className='fixed z-0 w-screen h-screen bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_40%,rgba(0,0,0,0.5)_100%)]'></div>
-      <main ref={mainRef} className='flex-1 text-white flex flex-col relative z-10 opacity-0'>
+      <main ref={mainRef} className='flex-1 text-white flex flex-col relative z-10 invisible'>
         <div className='flex items-center justify-center gap-6 my-6'>
           <div className='self-center h-[300px] w-[300px] overflow-hidden rounded-full mt-6 drop-shadow-black drop-shadow-lg'><img onLoad={() => setProfilePicLoaded(true)} ref={profilePicRef} src="/profilePic.jpg" alt="" width={300} height={300} className='-mt-[30px]'/></div>
           <div>
@@ -63,7 +63,7 @@ function App() {
            © 2025 Justin Chenvanich
         </footer>
       </main>
-      <div ref={divRef} className='sticky top-0 h-screen flex flex-col z-10 opacity-0'>
+      <div ref={divRef} className='sticky top-0 h-screen flex flex-col z-10 invisible'>
         <div className='flex-1 flex items-center justify-center'>
           <div className='w-fit text-white bg-gray-800 rounded-lg p-4 shadow-md shadow-black'>
             <h1 className='text-3xl border-b-2 pb-1 mb-1'>Contents</h1>
@@ -75,7 +75,7 @@ function App() {
             </ul>
           </div>
         </div>
-        <div ref={containerRef}>
+        <div ref={containerRef} className=' w-[500px] h-[500px]'>
 
         </div>
       </div>
