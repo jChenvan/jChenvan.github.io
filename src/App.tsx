@@ -45,8 +45,7 @@ function App() {
   }, [canvas, setProgress])
 
   return (
-    <div className='bg-[#171820] min-h-screen flex relative'>
-      <div className='fixed z-0 w-screen h-screen bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_40%,rgba(0,0,0,0.5)_100%)]'></div>
+    <div className='min-h-screen flex relative bg-gradient-to-tr from-[#060027] to-[#2c0046]'>
       <main ref={mainRef} className='flex-1 text-white flex flex-col relative z-10 opacity-0'>
         <div className='flex items-center justify-center gap-6 my-6'>
           <div className='self-center h-[300px] w-[300px] overflow-hidden rounded-full mt-6 drop-shadow-black drop-shadow-lg'><img onLoad={() => setProfilePicLoaded(true)} ref={profilePicRef} src="/profilePic.jpg" alt="" width={300} height={300} className='-mt-[30px]'/></div>
@@ -65,17 +64,17 @@ function App() {
       </main>
       <div ref={divRef} className='sticky top-0 h-screen flex flex-col z-10 opacity-0'>
         <div className='flex-1 flex items-center justify-center'>
-          <div className='w-fit text-white bg-gray-800 rounded-lg p-4 shadow-md shadow-black'>
-            <h1 className='text-3xl border-b-2 pb-1 mb-1'>Contents</h1>
-            <ul className='pl-2'>
-              <li><a href="#skills" className='hover:text-red-700 hover:ml-2 transition-all text-2xl'>Skills</a></li>
-              <li><a href="#projects" className='hover:text-blue-800 hover:ml-2 transition-all text-2xl'>Projects</a></li>
-              <li><a href="#education" className='hover:text-amber-600 hover:ml-2 transition-all text-2xl'>Education</a></li>
-              <li><a href="#contacts" className='hover:text-green-700 hover:ml-2 transition-all text-2xl'>Contacts</a></li>
+          <div className='w-fit text-white bg-gray-900 rounded-lg overflow-hidden shadow-md shadow-black'>
+            <h1 className='text-3xl bg-purple-950 py-2 px-4 mb-1'>Contents</h1>
+            <ul className='py-2 px-4'>
+              <li><a href="#skills" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Skills</a></li>
+              <li><a href="#projects" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Projects</a></li>
+              <li><a href="#education" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Education</a></li>
+              <li><a href="#contacts" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Contacts</a></li>
             </ul>
           </div>
         </div>
-        <div ref={containerRef}>
+        <div ref={containerRef} className='drop-shadow-lg drop-shadow-violet-950'>
 
         </div>
       </div>

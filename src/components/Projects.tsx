@@ -10,15 +10,15 @@ export default function Projects() {
       if (vid) vid.load();
     }, [currentProject]);
 
-    return <section className='shadow-lg shadow-black rounded-lg p-4 m-6 bg-blue-800 text-white' id="projects">
+    return <section className='shadow-lg shadow-black rounded-lg overflow-hidden m-6 bg-gray-900 text-white' id="projects">
           <div className='relative'>
-            <h2 className='text-4xl text-center pb-4 border-b-2'>My Projects</h2>
-            <select id="project" value={currentProject} onChange={e=>setCurrentProject(e.target.value)} className='absolute top-0 right-0 bg-black p-2 rounded-md'>
+            <h2 className='text-4xl text-center p-4 bg-purple-950'>My Projects</h2>
+            <select id="project" value={currentProject} onChange={e=>setCurrentProject(e.target.value)} className='absolute top-2 right-2 bg-black p-2 rounded-md'>
               {Object.keys(projects).map((title, index)=><option key={index} value={title}>{title}</option>)}
             </select>
           </div>
           <div>
-            <div className="w-fit h-[500px] mx-auto my-6 border-blue-950 bg-black rounded-lg border-8 box-content">
+            <div className="w-fit h-[500px] mx-auto my-6 border-black bg-black rounded-lg border-8 box-content">
               <video ref={videoRef} autoPlay muted loop className="h-[500px]">
                 <source src={`/previews/${projects[currentProject as keyof typeof projects].preview}`} type="video/mp4"/>
               </video>
@@ -31,7 +31,7 @@ export default function Projects() {
             </div>
             <div>
               <ul className="w-fit my-4 mx-auto">
-                {Object.entries(projects[currentProject as keyof typeof projects].links).map(([text, url])=><li key={url as string} className='bg-blue-950 text-center mt-2 p-2 rounded-md rounded-br-none hover:bg-blue-500 transition-all'><a href={url}>{text}</a></li>)}
+                {Object.entries(projects[currentProject as keyof typeof projects].links).map(([text, url])=><li key={url as string} className='bg-black text-center mt-2 p-2 rounded-md rounded-br-none hover:bg-gray-700 transition-all'><a href={url}>{text}</a></li>)}
               </ul>
             </div>
           </div>

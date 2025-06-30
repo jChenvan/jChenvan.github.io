@@ -16,9 +16,10 @@ export default function useAnimation() {
         scene.current.add(gltfScene);
 
         const light1 = gltfScene.getObjectByName('Point') as THREE.DirectionalLight;
-        light1.intensity = 1;
+        light1.intensity = 0.15;
         const light2 = gltfScene.getObjectByName('Point002') as THREE.DirectionalLight;
         light2.intensity = 0.5;
+        light2.color = new THREE.Color(0xaa00ff);
 
         const camera = gltf.cameras[0];
 
