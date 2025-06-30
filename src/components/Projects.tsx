@@ -12,8 +12,8 @@ export default function Projects() {
 
     return <section className='shadow-lg shadow-black rounded-lg overflow-hidden m-6 bg-gray-900 text-white' id="projects">
           <div className='relative'>
-            <h2 className='text-4xl text-center p-4 bg-purple-950'>My Projects</h2>
-            <select id="project" value={currentProject} onChange={e=>setCurrentProject(e.target.value)} className='absolute top-2 right-2 bg-black p-2 rounded-md'>
+            <h2 className='text-4xl text-center p-4 pb-6 sm:pb-4 bg-purple-950'>My Projects</h2>
+            <select id="project" value={currentProject} onChange={e=>setCurrentProject(e.target.value)} className='absolute top-full -translate-y-1/2 right-2 bg-black p-2 rounded-md'>
               {Object.keys(projects).map((title, index)=><option key={index} value={title}>{title}</option>)}
             </select>
           </div>
@@ -25,7 +25,7 @@ export default function Projects() {
             </div>
             <div className='flex flex-col items-center flex-1 px-2'>
               <h3 className='text-2xl'>{currentProject}</h3>
-              <p>
+              <p className="mx-2">
                 {projects[currentProject as keyof typeof projects].description}
               </p>
             </div>

@@ -47,11 +47,11 @@ function App() {
   return (
     <div className='min-h-screen flex relative bg-gradient-to-tr from-[#060027] to-[#2c0046]'>
       <main ref={mainRef} className='flex-1 text-white flex flex-col relative z-10 opacity-0'>
-        <div className='flex items-center justify-center gap-6 my-6'>
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-6 my-6 pl-4'>
           <div className='self-center h-[300px] w-[300px] overflow-hidden rounded-full mt-6 drop-shadow-black drop-shadow-lg'><img onLoad={() => setProfilePicLoaded(true)} ref={profilePicRef} src="/profilePic.jpg" alt="" width={300} height={300} className='-mt-[30px]'/></div>
           <div>
             <h1 className='self-center text-6xl my-6'>Justin Chenvanich</h1>
-            <p className="self-center w-[50ch] mb-4 ml-4">It's a pleasure to meet you! I'm Justin, recent UWaterloo graduate and full stack web dev. Scroll down to get a glimpse of what I have to offer! </p>
+            <p className="self-center max-w-[50ch] mb-4 ml-4">It's a pleasure to meet you! I'm Justin, recent UWaterloo graduate and full stack web dev. Scroll down to get a glimpse of what I have to offer! </p>
         </div>
         </div>
         <Skills/>
@@ -62,7 +62,7 @@ function App() {
            © 2025 Justin Chenvanich
         </footer>
       </main>
-      <div ref={divRef} className='sticky top-0 h-screen flex flex-col z-10 opacity-0'>
+      <div ref={divRef} className='sticky top-0 h-screen flex-col z-10 opacity-0 hidden lg:flex'>
         <div className='flex-1 flex items-center justify-center'>
           <div className='w-fit text-white bg-gray-900 rounded-lg overflow-hidden shadow-md shadow-black'>
             <h1 className='text-3xl bg-purple-950 py-2 px-4 mb-1'>Contents</h1>

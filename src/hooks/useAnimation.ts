@@ -76,7 +76,7 @@ export default function useAnimation() {
             gltfLoader.load("/crankyMe.glb", gltf => setGltf(gltf));
             return;
         }
-        renderer.current.setSize(500, 500);
+        renderer.current.setSize(300, 300);
         renderer.current.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.current.toneMappingExposure = 3;
         renderer.current.setClearColor(0x000000,0);
