@@ -50,7 +50,17 @@ function App() {
         <div className='flex flex-col sm:flex-row items-center justify-center gap-6 my-6 pl-4'>
           <div className='self-center h-[300px] w-[300px] overflow-hidden rounded-full mt-6 drop-shadow-black drop-shadow-lg'><img onLoad={() => setProfilePicLoaded(true)} ref={profilePicRef} src="/profilePic.jpg" alt="" width={300} height={300} className='-mt-[30px]'/></div>
           <div>
-            <h1 className='self-center text-6xl my-6'>Justin Chenvanich</h1>
+            <h1 className='self-center text-6xl'>Justin Chenvanich</h1>
+            <div className='flex gap-4 my-4'>
+              <a href="mailto:jchenvan@uwaterloo.ca" className='hover:opacity-70 transition-all'>
+                <img src="/email.svg" alt="" className='h-[40px]'/>
+              </a>
+              <a href="https://www.linkedin.com/in/jchenvan/" className='hover:opacity-70 transition-all'>
+              <img src="/linkedin.png" alt="" className='h-[40px]'/>
+              </a>
+              <a href="https://github.com/jChenvan" className='hover:opacity-70 transition-all'>
+              <img src="/github.png" alt="" className='h-[40px]'/></a>
+            </div>
             <p className="self-center max-w-[50ch] mb-4 ml-4">It's a pleasure to meet you! I'm Justin, recent UWaterloo graduate and full stack web dev. Scroll down to get a glimpse of what I have to offer! </p>
         </div>
         </div>
