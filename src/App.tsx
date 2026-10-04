@@ -266,7 +266,7 @@ function App() {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-300/30">
+    <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-300/30">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-136 bg-[radial-gradient(ellipse_at_top,rgba(8,145,178,0.16),transparent_65%)]" />
       <header className="sticky top-0 z-10 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-8">
