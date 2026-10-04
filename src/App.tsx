@@ -175,7 +175,7 @@ function Experiences({ title, experiences, id }: ExperiencesProps) {
       <div className="flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-950/50 p-5 sm:flex-row sm:gap-6 sm:p-6">
         <img
           alt={`${company} logo`}
-          className="h-16 w-16 shrink-0 rounded-xl border border-slate-800 bg-white object-contain p-2"
+          className="h-16 w-16 shrink-0 rounded-xl border border-slate-800 object-contain p-2"
           src={imageSrc}
         />
         <div className="min-w-0">
@@ -207,7 +207,7 @@ function Education({ imageSrc, title, desc, school, major, minor, date, id }: Ed
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
         <img
           alt="University of Waterloo logo"
-          className="h-20 w-20 shrink-0 rounded-2xl border border-slate-800 bg-white object-contain p-2"
+          className="h-20 w-20 shrink-0 rounded-2xl border border-slate-800 object-contain p-2"
           src={imageSrc}
         />
         <div className="min-w-0">
@@ -267,7 +267,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 selection:bg-cyan-300/30">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-[34rem] bg-[radial-gradient(ellipse_at_top,rgba(8,145,178,0.16),transparent_65%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-136 bg-[radial-gradient(ellipse_at_top,rgba(8,145,178,0.16),transparent_65%)]" />
       <header className="sticky top-0 z-10 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <a className="flex items-center justify-center gap-3 sm:justify-start" href="#top">
