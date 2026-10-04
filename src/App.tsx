@@ -281,14 +281,10 @@ function App() {
       </header>
       <main className="relative mx-auto flex max-w-5xl flex-col gap-6 px-5 pb-16 pt-12 sm:gap-8 sm:px-8 sm:pt-16" id="top">
         <div className="mb-2">
-          <p className="mb-3 flex items-center gap-2 text-sm font-medium text-cyan-300">
-            <span aria-hidden="true" className="h-px w-8 bg-cyan-400" />
-            Portfolio
-          </p>
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             Justin Chenvanich<span className="text-cyan-300">.</span>
           </h1>
-          <p className="mt-4 text-lg text-slate-400">Recent graduate · Full-stack web developer</p>
+          <p className="mt-4 text-lg text-slate-400">Full-stack web developer</p>
         </div>
         <Intro
           id="intro"
