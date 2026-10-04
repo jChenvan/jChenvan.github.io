@@ -149,9 +149,6 @@ interface ExperiencesProps {
 }
 
 function Experiences({ title, experiences, id }: ExperiencesProps) {
-  const [index, setIndex] = useState(0);
-  const { position, company, date, imageSrc, desc } = experiences[index];
-
   return (
     <Section id={id}>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -159,32 +156,24 @@ function Experiences({ title, experiences, id }: ExperiencesProps) {
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Where I have worked</p>
           <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
         </div>
-        <select
-          aria-label="Select experience"
-          className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-200 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 sm:max-w-xs"
-          onChange={(event) => setIndex(Number(event.target.value))}
-          value={index}
-        >
-          {experiences.map(({ company, position }, experienceIndex) => (
-            <option key={experienceIndex} value={experienceIndex}>
-              {position} at {company}
-            </option>
-          ))}
-        </select>
       </div>
-      <div className="flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-950/50 p-5 sm:flex-row sm:gap-6 sm:p-6">
-        <img
-          alt={`${company} logo`}
-          className="h-16 w-16 shrink-0 rounded-xl border border-slate-800 object-contain p-2"
-          src={imageSrc}
-        />
-        <div className="min-w-0">
-          <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 className="text-lg font-semibold text-white">{position} at {company}</h3>
-            <span className="text-sm text-slate-400">{date}</span>
+      <div className="flex flex-col gap-2">
+        {experiences.map(({company,date,desc,imageSrc,position})=>(
+          <div className="flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-950/50 p-5 sm:flex-row sm:gap-6 sm:p-6">
+            <img
+              alt={`${company} logo`}
+              className="h-16 w-16 shrink-0 rounded-xl border border-slate-800 object-contain p-2"
+              src={imageSrc}
+            />
+            <div className="min-w-0">
+              <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 className="text-lg font-semibold text-white">{position} at {company}</h3>
+                <span className="text-sm text-slate-400">{date}</span>
+              </div>
+              <Paragraphs className="leading-7 text-slate-300" text={desc} />
+            </div>
           </div>
-          <Paragraphs className="leading-7 text-slate-300" text={desc} />
-        </div>
+        ))}
       </div>
     </Section>
   );
