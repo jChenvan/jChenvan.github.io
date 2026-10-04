@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import longText from "./long-text";
 
 function Paragraphs({ text, className }: { text: string; className?: string }) {
@@ -196,7 +196,7 @@ function Education({ imageSrc, title, desc, school, major, minor, date, id }: Ed
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
         <img
           alt="University of Waterloo logo"
-          className="h-20 w-20 shrink-0 rounded-2xl border border-slate-800 object-contain p-2"
+          className="w-20 shrink-0 rounded-2xl border border-slate-800 object-contain p-4"
           src={imageSrc}
         />
         <div className="min-w-0">
