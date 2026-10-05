@@ -240,21 +240,21 @@ const experiences: Experience[] = [
     company: "Euna Solutions",
     date: "Jan 2026 - Present",
     desc: longText.eunaDesc,
-    imageSrc: "/email.svg",
+    imageSrc: "/euna.png",
   },
   {
     position: "Volunteer Software Developer",
     company: "CivicTechWR",
     date: "Mar 2025 - Oct 2025",
     desc: longText.civicTechDesc,
-    imageSrc: "/email.svg",
+    imageSrc: "/civictech.png",
   },
   {
     position: "Volunteer Software Developer",
     company: "STEM For Others",
     date: "Mar 2025 - Apr 2025",
     desc: "Contributed to an e-learning platform built with Next.js, React, and TypeScript. Identified the limitations of the platform's basic plaintext code editor and proposed replacing it with Monaco Editor, the editor technology used by VS Code. Independently implemented the integration while preserving existing exercise functionality, giving students a more capable and familiar coding environment.",
-    imageSrc: "/email.svg",
+    imageSrc: "/stemforothers.png",
   },
 ];
 
