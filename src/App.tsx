@@ -75,8 +75,7 @@ function Intro({ imageSrc, title, intro, contacts, id }: IntroProps) {
           src={imageSrc}
         />
         <div className="min-w-0 flex-1 text-center md:text-left">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">A little about me</p>
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+          <h2 className="mb-3 text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
           <Paragraphs className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8" text={intro} />
           <div aria-label="Contact links" className="mt-7 flex items-center justify-center gap-3 md:justify-start">
             {contacts.map((contact) => (
@@ -109,8 +108,7 @@ function Skills({ title, desc, skills, id }: SkillsProps) {
   return (
     <Section id={id}>
       <div className="mb-7">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">What I work with</p>
-        <h2 className="mb-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+        <h2 className="mb-2 text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
         <p className="max-w-3xl leading-7 text-slate-400">{desc}</p>
       </div>
       <dl className="grid gap-3 sm:grid-cols-2">
@@ -153,8 +151,7 @@ function Experiences({ title, experiences, id }: ExperiencesProps) {
     <Section id={id}>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Where I have worked</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+          <h2 className="text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
         </div>
       </div>
       <div className="flex flex-col gap-2">
