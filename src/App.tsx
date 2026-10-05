@@ -1,95 +1,314 @@
-import { useEffect, useRef, useState } from 'react'
-import useAnimation from './hooks/useAnimation'
-import './index.css'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Education from './components/Education'
-import Contacts from './components/Contacts'
-import throttle from './lib/throttle'
+import { type ReactNode } from "react";
+import longText from "./long-text";
 
-function betterModulo(a:number, b:number) {
-  return ((a % b) + b) % b;
+function Paragraphs({ text, className }: { text: string; className?: string }) {
+  const paragraphs = text.split("\n").map((str) => str.trim()).filter(Boolean);
+
+  return (
+    <>
+      {paragraphs.map((paragraph, index) => (
+        <p className={`${className} ${index === 0 ? '' : 'pt-1'}`} key={`${index}-${paragraph}`}>
+          {paragraph}
+        </p>
+      ))}
+    </>
+  );
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface NavProps {
+  navItems: NavItem[];
+}
+
+function Nav({ navItems }: NavProps) {
+  return (
+    <nav aria-label="Main navigation" className="flex flex-wrap items-center justify-center gap-1 sm:justify-end">
+      {navItems.map((item) => (
+        <a
+          className="rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+          href={item.href}
+          key={item.href}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+function Section({ children, id }: { children?: ReactNode | ReactNode[]; id: string }) {
+  return (
+    <section
+      className="scroll-mt-28 rounded-3xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-xl shadow-black/10 sm:p-8"
+      id={id}
+    >
+      {children}
+    </section>
+  );
+}
+
+interface Contact {
+  imageSrc: string;
+  url: string;
+  label?: string;
+}
+
+interface IntroProps {
+  imageSrc: string;
+  title: string;
+  intro: string;
+  contacts: Contact[];
+  id: string;
+}
+
+function Intro({ imageSrc, title, intro, contacts, id }: IntroProps) {
+  return (
+    <Section id={id}>
+      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
+        <img
+          alt="Justin Chenvanich"
+          className="h-52 w-52 shrink-0 rounded-2xl border border-slate-700 object-cover shadow-lg shadow-black/30 sm:h-60 sm:w-60"
+          src={imageSrc}
+        />
+        <div className="min-w-0 flex-1 text-center md:text-left">
+          <h2 className="mb-3 text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
+          <Paragraphs className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8" text={intro} />
+          <div aria-label="Contact links" className="mt-7 flex items-center justify-center gap-3 md:justify-start">
+            {contacts.map((contact) => (
+              <a
+                aria-label={contact.label ?? contact.url}
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 transition hover:-translate-y-0.5 hover:border-cyan-400/60 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                href={contact.url}
+                key={contact.url}
+                rel={contact.url.startsWith("http") ? "noreferrer" : undefined}
+                target={contact.url.startsWith("http") ? "_blank" : undefined}
+              >
+                <img alt="" className="h-5 w-5 object-contain" src={contact.imageSrc} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+interface SkillsProps {
+  title: string;
+  desc: string;
+  skills: { [category: string]: string[] };
+  id: string;
+}
+
+function Skills({ title, desc, skills, id }: SkillsProps) {
+  return (
+    <Section id={id}>
+      <div className="mb-7">
+        <h2 className="mb-2 text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
+        <p className="max-w-3xl leading-7 text-slate-400">{desc}</p>
+      </div>
+      <dl className="grid gap-3 sm:grid-cols-2">
+        {Object.entries(skills).map(([category, skillList]) => (
+          <div className="rounded-2xl border border-slate-800 bg-slate-950/50 p-4" key={category}>
+            <dt className="mb-3 text-sm font-semibold text-slate-200">{category}</dt>
+            <dd className="flex flex-wrap gap-2">
+              {skillList.map((skill) => (
+                <span
+                  className="rounded-lg border border-slate-700/80 bg-slate-800/80 px-2.5 py-1 text-xs font-medium text-slate-300"
+                  key={skill}
+                >
+                  {skill}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
+  );
+}
+
+interface Experience {
+  company: string;
+  position: string;
+  date: string;
+  desc: string;
+  imageSrc: string;
+}
+
+interface ExperiencesProps {
+  title: string;
+  experiences: Experience[];
+  id: string;
+}
+
+function Experiences({ title, experiences, id }: ExperiencesProps) {
+  return (
+    <Section id={id}>
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-md font-semibold uppercase tracking-[0.2em] text-cyan-300">{title}</h2>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        {experiences.map(({company,date,desc,imageSrc,position})=>(
+          <div className="flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-950/50 p-5 sm:flex-row sm:gap-6 sm:p-6">
+            <img
+              alt={`${company} logo`}
+              className="h-16 w-16 shrink-0 rounded-xl border border-slate-800 object-contain p-2"
+              src={imageSrc}
+            />
+            <div className="min-w-0">
+              <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 className="text-lg font-semibold text-white">{position} at {company}</h3>
+                <span className="text-sm text-slate-400">{date}</span>
+              </div>
+              <Paragraphs className="leading-7 text-slate-300" text={desc} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+interface EducationProps {
+  imageSrc: string;
+  title: string;
+  school: string;
+  major: string;
+  minor: string;
+  date: string;
+  desc: string;
+  id: string;
+}
+
+function Education({ imageSrc, title, desc, school, major, minor, date, id }: EducationProps) {
+  return (
+    <Section id={id}>
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+        <img
+          alt="University of Waterloo logo"
+          className="w-20 shrink-0 rounded-2xl border border-slate-800 object-contain p-4"
+          src={imageSrc}
+        />
+        <div className="min-w-0">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Education</p>
+          <h2 className="mb-2 text-2xl font-semibold tracking-tight text-white">{title}</h2>
+          <p className="mb-4 text-sm leading-6 text-slate-400">
+            {school} <span className="text-slate-600">·</span> {major} major, {minor} minor{" "}
+            <span className="text-slate-600">·</span> {date}
+          </p>
+          <Paragraphs className="leading-7 text-slate-300" text={desc} />
+        </div>
+      </div>
+    </Section>
+  );
 }
 
 function App() {
-  const { setProgress, canvas, done } = useAnimation();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const profilePicRef = useRef<HTMLImageElement>(null);
-  const mainRef = useRef<HTMLElement>(null);
-  const divRef = useRef<HTMLDivElement>(null);
-  const [profilePicLoaded, setProfilePicLoaded] = useState(false);
-  const lastScrollPos = useRef(window.scrollY);
-  const animationProgress = useRef(0);
+  const navItems: NavItem[] = [
+    { label: "About Me", href: "#intro" },
+    { label: "My Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
+    { label: "Education", href: "#education" },
+  ];
 
-  useEffect(()=>{
-    if (done && profilePicLoaded && mainRef.current && divRef.current) {
-      mainRef.current.classList.remove("opacity-0");
-      divRef.current.classList.remove("opacity-0");
-      mainRef.current.classList.add("fade-in");
-      divRef.current.classList.add("fade-in");
-    }
-  },[done, profilePicLoaded]);
+  const contacts: Contact[] = [
+    { imageSrc: "/email.svg", url: "mailto:jchenvan@uwaterloo.ca", label: "Email Justin" },
+    { imageSrc: "/github.png", url: "https://github.com/jChenvan/", label: "GitHub profile" },
+    { imageSrc: "/linkedin.png", url: "https://www.linkedin.com/in/jchenvan/", label: "LinkedIn profile" },
+  ];
 
-  useEffect(() => {
-    if (containerRef.current && canvas) {
-      containerRef.current.appendChild(canvas);
-    }
-    window.onscroll = throttle(()=>{
-      const currentScrollPos = window.scrollY;
-      const difference = (currentScrollPos - lastScrollPos.current)/window.innerHeight;
-      animationProgress.current = betterModulo(animationProgress.current + difference,1);
-      setProgress(animationProgress.current);
+  const skills = {
+    ["Programming Languages"]: ["TypeScript", "JavaScript", "Python", "C", "R"],
+    ["Backend"]: ["NodeJs", "ExpressJs", "REST", "Prisma ORM", "Firebase"],
+    ["Frontend"]: ["HTML", "CSS", "React", "TailwindCSS", "ThreeJS"],
+    ["Mobile"]: ["Flutter"],
+    ["Database"]: ["PostgreSQL", "MySQL"],
+    ["Operating Systems"]: ["Linux", "Windows", "MacOS"],
+    ["Other"]: ["Blender"],
+  };
 
-      lastScrollPos.current = currentScrollPos;
-    },25);
-  }, [canvas, setProgress])
+const experiences: Experience[] = [
+  {
+    position: "Software Developer",
+    company: "Euna Solutions",
+    date: "Jan 2026 - Present",
+    desc: longText.eunaDesc,
+    imageSrc: "/euna.png",
+  },
+  {
+    position: "Volunteer Software Developer",
+    company: "CivicTechWR",
+    date: "Mar 2025 - Oct 2025",
+    desc: longText.civicTechDesc,
+    imageSrc: "/civictech.png",
+  },
+  {
+    position: "Volunteer Software Developer",
+    company: "STEM For Others",
+    date: "Mar 2025 - Apr 2025",
+    desc: "Contributed to an e-learning platform built with Next.js, React, and TypeScript. Identified the limitations of the platform's basic plaintext code editor and proposed replacing it with Monaco Editor, the editor technology used by VS Code. Independently implemented the integration while preserving existing exercise functionality, giving students a more capable and familiar coding environment.",
+    imageSrc: "/stemforothers.png",
+  },
+];
 
   return (
-    <div className='min-h-screen flex relative bg-gradient-to-tr from-[#060027] to-[#2c0046]'>
-      <main ref={mainRef} className='flex-1 text-white flex flex-col relative z-10 opacity-0'>
-        <div className='flex flex-col sm:flex-row items-center justify-center gap-6 my-6 pl-4'>
-          <div className='self-center h-[300px] w-[300px] overflow-hidden rounded-full mt-6 drop-shadow-black drop-shadow-lg'><img onLoad={() => setProfilePicLoaded(true)} ref={profilePicRef} src="/profilePic.jpg" alt="" width={300} height={300} className='-mt-[30px]'/></div>
-          <div>
-            <h1 className='self-center text-6xl'>Justin Chenvanich</h1>
-            <div className='flex gap-4 my-4'>
-              <a href="mailto:jchenvan@uwaterloo.ca" className='hover:opacity-70 transition-all'>
-                <img src="/email.svg" alt="" className='h-[40px]'/>
-              </a>
-              <a href="https://www.linkedin.com/in/jchenvan/" className='hover:opacity-70 transition-all'>
-              <img src="/linkedin.png" alt="" className='h-[40px]'/>
-              </a>
-              <a href="https://github.com/jChenvan" className='hover:opacity-70 transition-all'>
-              <img src="/github.png" alt="" className='h-[40px]'/></a>
-            </div>
-            <p className="self-center max-w-[50ch] mb-4 ml-4">It's a pleasure to meet you! I'm Justin, recent UWaterloo graduate and full stack web dev. Scroll down to get a glimpse of what I have to offer! </p>
+    <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-300/30">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-136 bg-[radial-gradient(ellipse_at_top,rgba(8,145,178,0.16),transparent_65%)]" />
+      <header className="sticky top-0 z-10 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <a className="flex items-center justify-center gap-3 sm:justify-start" href="#top">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-400/10 text-sm font-bold text-cyan-300 ring-1 ring-inset ring-cyan-300/20">
+              JC
+            </span>
+            <span className="text-sm font-semibold tracking-wide text-slate-200">Justin Chenvanich</span>
+          </a>
+          <Nav navItems={navItems} />
         </div>
+      </header>
+      <main className="relative mx-auto flex max-w-5xl flex-col gap-6 px-5 pb-16 pt-12 sm:gap-8 sm:px-8 sm:pt-16" id="top">
+        <div className="mb-2">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Justin Chenvanich<span className="text-cyan-300">.</span>
+          </h1>
+          <p className="mt-4 text-lg text-slate-400">Full-stack web developer</p>
         </div>
-        <Skills/>
-        <Projects/>
-        <Education/>
-        <Contacts/>
-        <footer className='text-center p-4'>
-           © 2025 Justin Chenvanich
-        </footer>
+        <Intro
+          id="intro"
+          title="About Me"
+          intro={longText.intro}
+          imageSrc="/profile-pic.jpg"
+          contacts={contacts}
+        />
+        <Skills
+          id="skills"
+          title="My Skills"
+          desc={longText.skillsIntro}
+          skills={skills}
+        />
+        <Experiences id="experience" title="Experience" experiences={experiences} />
+        <Education
+          id="education"
+          title="University of Waterloo"
+          date="Sep 2019 - Aug 2024"
+          desc={longText.educationDesc}
+          imageSrc="/UWaterlooLogo.png"
+          major="Applied Maths"
+          minor="Computer Science"
+          school="University of Waterloo"
+        />
       </main>
-      <div ref={divRef} className='sticky top-0 h-screen flex-col z-10 opacity-0 hidden lg:flex'>
-        <div className='flex-1 flex items-center justify-center'>
-          <div className='w-fit text-white bg-gray-900 rounded-lg overflow-hidden shadow-md shadow-black'>
-            <h1 className='text-3xl bg-purple-950 py-2 px-4 mb-1'>Contents</h1>
-            <ul className='py-2 px-4'>
-              <li><a href="#skills" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Skills</a></li>
-              <li><a href="#projects" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Projects</a></li>
-              <li><a href="#education" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Education</a></li>
-              <li><a href="#contacts" className='hover:text-purple-700 hover:ml-2 hover:-mr-2 transition-all text-2xl'>Contacts</a></li>
-            </ul>
-          </div>
-        </div>
-        <div ref={containerRef} className='drop-shadow-lg drop-shadow-violet-950'>
-
-        </div>
-      </div>
+      <footer className="border-t border-slate-800/80 px-5 py-6 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} Justin Chenvanich
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
