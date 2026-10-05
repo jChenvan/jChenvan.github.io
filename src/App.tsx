@@ -7,7 +7,7 @@ function Paragraphs({ text, className }: { text: string; className?: string }) {
   return (
     <>
       {paragraphs.map((paragraph, index) => (
-        <p className={className} key={`${index}-${paragraph}`}>
+        <p className={`${className} ${index === 0 ? '' : 'pt-1'}`} key={`${index}-${paragraph}`}>
           {paragraph}
         </p>
       ))}
@@ -237,22 +237,29 @@ function App() {
     ["Other"]: ["Blender"],
   };
 
-  const experiences: Experience[] = [
-    {
-      position: "temp1",
-      company: "temp1",
-      date: "Jan 2001 - Jan 2002",
-      desc: "this is a placeholder,",
-      imageSrc: "/email.svg",
-    },
-    {
-      position: "temp1",
-      company: "temp1",
-      date: "Jan 2001 - Jan 2002",
-      desc: "this is a placeholder,",
-      imageSrc: "/email.svg",
-    },
-  ];
+const experiences: Experience[] = [
+  {
+    position: "Software Developer",
+    company: "Euna Solutions",
+    date: "Jan 2026 - Present",
+    desc: longText.eunaDesc,
+    imageSrc: "/email.svg",
+  },
+  {
+    position: "Volunteer Software Developer",
+    company: "CivicTechWR",
+    date: "Mar 2025 - Oct 2025",
+    desc: longText.civicTechDesc,
+    imageSrc: "/email.svg",
+  },
+  {
+    position: "Volunteer Software Developer",
+    company: "STEM For Others",
+    date: "Mar 2025 - Apr 2025",
+    desc: "Contributed to an e-learning platform built with Next.js, React, and TypeScript. Identified the limitations of the platform's basic plaintext code editor and proposed replacing it with Monaco Editor, the editor technology used by VS Code. Independently implemented the integration while preserving existing exercise functionality, giving students a more capable and familiar coding environment.",
+    imageSrc: "/email.svg",
+  },
+];
 
   return (
     <div className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-300/30">
